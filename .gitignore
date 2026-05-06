@@ -1,0 +1,6 @@
+# Adicione isso ao arquivo .gitignore
+node_modules/
+.next/
+.DS_Store
+dist/
+build/

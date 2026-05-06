@@ -1,0 +1,139 @@
+@import "tailwindcss";
+
+@import "@fontsource/quicksand/400.css";
+@import "@fontsource/quicksand/500.css";
+@import "@fontsource/quicksand/700.css";
+
+@theme {
+  --color-brand-orange: #ffd8b1;
+  --color-brand-orange-dark: #ffb877;
+  --color-brand-gray: #f3f4f6;
+  --font-quicksand: "Quicksand", sans-serif;
+}
+
+:root {
+  --bg-main: #ffffff;
+  --text-main: #2d3436;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: var(--bg-main);
+}
+
+body {
+  font-family: "Quicksand", sans-serif;
+  color: var(--text-main);
+  background:
+    radial-gradient(circle at top right, #ffd8b133 0%, transparent 40%),
+    radial-gradient(circle at bottom left, #ffd8b122 0%, transparent 40%);
+  min-height: 100vh;
+  line-height: 1.6;
+}
+
+/* Container principal com foco em leitura */
+main,
+.main-content {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem;
+}
+
+/* Títulos: Saem os gradientes agressivos, entra a sobriedade */
+h1,
+h2,
+h3 {
+  color: #e67e22; /* Laranja mais profundo para leitura */
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 1rem;
+}
+
+/* Cards: Estilo Neumorphism Suave (mais moderno e legível) */
+.rounded-xl,
+.rounded-lg {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(255, 216, 178, 0.4);
+  box-shadow:
+    0 10px 25px -5px rgba(230, 126, 34, 0.05),
+    0 8px 10px -6px rgba(230, 126, 34, 0.05);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(10px);
+}
+
+.rounded-xl:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 25px -5px rgba(230, 126, 34, 0.1);
+  border-color: var(--color-brand-orange-dark);
+}
+
+/* Botões: Focados em acessibilidade (grandes e claros) */
+button,
+.btn {
+  padding: 1rem 2rem;
+  border-radius: 1rem;
+  font-weight: 600;
+  font-size: 1.1rem;
+  background-color: var(--color-brand-orange);
+  color: #633d1a; /* Contraste alto para leitura */
+  transition: all 0.2s ease;
+  border: 2px solid transparent;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+button:hover {
+  background-color: var(--color-brand-orange-dark);
+  transform: scale(1.02);
+  box-shadow: 0 4px 15px rgba(255, 184, 119, 0.4);
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+/* Inputs: Amigáveis e claros */
+input,
+textarea {
+  background: #fdfdfd;
+  border: 2px solid #eee;
+  padding: 1rem;
+  border-radius: 1rem;
+  transition: all 0.2s ease;
+  width: 100%;
+}
+
+input:focus {
+  outline: none;
+  border-color: var(--color-brand-orange-dark);
+  box-shadow: 0 0 0 4px rgba(255, 216, 177, 0.3);
+}
+
+/* Scrollbar Minimalista */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-brand-orange);
+  border-radius: 10px;
+}
+
+/* Animação de entrada suave */
+.fade-in {
+  animation: fadeIn 0.8s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
