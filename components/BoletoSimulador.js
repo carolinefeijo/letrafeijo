@@ -33,10 +33,23 @@ export default function BoletoSimulador() {
     }
   }
 
+  const falar = (texto) => {
+    if (typeof window !== 'undefined') {
+      window.speechSynthesis.cancel();
+      const msg = new SpeechSynthesisUtterance(texto);
+      msg.lang = 'pt-BR';
+      window.speechSynthesis.speak(msg);
+    }
+  }
+
   return (
     <div className="w-full max-w-lg bg-gray-50 rounded-xl shadow p-6 flex flex-col gap-4 border border-gray-200" role="region" aria-label="Simulador de Boleto Bancário">
-      <h2 className="text-xl font-bold text-gray-700 mb-2" tabIndex={0}>Simulador de Boleto Bancário</h2>
-      <p className="text-base text-gray-600 mb-4 font-medium" tabIndex={0}>{pergunta}</p>
+      <h2 className="text-xl font-bold text-gray-700 mb-2" tabIndex={0} 
+        onMouseEnter={() => falar('Simulador de Boleto Bancário')}
+      >Simulador de Boleto Bancário</h2>
+      <p className="text-base text-gray-600 mb-4 font-medium" tabIndex={0} 
+        onMouseEnter={() => falar(pergunta)}
+      >{pergunta}</p>
       <div className="flex flex-col gap-2">
         {campos.map((campo) => (
           <button

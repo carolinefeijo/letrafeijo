@@ -8,6 +8,15 @@ const chatData = [
   { sender: 'Você', text: 'Ok, vou pegar.' },
 ];
 
+const falar = (texto) => {
+  if (window.speechSynthesis) {
+    window.speechSynthesis.cancel();
+    const utterance = new SpeechSynthesisUtterance(texto);
+    utterance.lang = 'pt-BR';
+    window.speechSynthesis.speak(utterance);
+  }
+};
+
 const pergunta = 'Onde está a palavra troco?';
 
 export default function WhatsAppSimulador() {
@@ -28,8 +37,12 @@ export default function WhatsAppSimulador() {
 
   return (
     <div className="w-full max-w-md bg-gray-50 rounded-xl shadow p-6 flex flex-col gap-4 border border-gray-200" role="region" aria-label="Simulador de Chat WhatsApp">
-      <h2 className="text-xl font-bold text-gray-700 mb-2" tabIndex={0}>Simulador de Chat WhatsApp</h2>
-      <p className="text-base text-gray-600 mb-4 font-medium" tabIndex={0}>{pergunta}</p>
+      <h2 className="text-xl font-bold text-gray-700 mb-2" tabIndex={0} 
+        onMouseEnter={() => falar('Simulador de Conversa de  WhatsAp')}
+      >Simulador de Conversa de  WhatsApp</h2>
+      <p className="text-base text-gray-600 mb-4 font-medium" tabIndex={0} 
+        onMouseEnter={() => falar(pergunta)}
+      >{pergunta}</p>
       <div className="flex flex-col gap-2">
         {chatData.map((msg, i) => (
           <div key={i} className={`flex ${msg.sender === 'Você' ? 'justify-end' : 'justify-start'}`}>

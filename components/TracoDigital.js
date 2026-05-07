@@ -12,6 +12,16 @@ export default function TracoDigital() {
   const [feedback, setFeedback] = useState(null);
   const { speak, stop } = useVoiceGuidance();
 
+
+const falar = (texto) => {
+  if (window.speechSynthesis) {
+    window.speechSynthesis.cancel();
+    const utterance = new SpeechSynthesisUtterance(texto);
+    utterance.lang = 'pt-BR';
+    window.speechSynthesis.speak(utterance);
+  }
+};
+
   function startDesenho(e) {
     setDesenhando(true);
     setPontos([[getPos(e)]]);
@@ -28,7 +38,6 @@ export default function TracoDigital() {
 
   function endDesenho() {
     setDesenhando(false);
-    // Validação simples: se desenhou mais de X pontos, considera válido
     if (pontos.flat().length > 20) {
       setFeedback('Ótimo traço!');
       speak('Ótimo traço!');
@@ -58,8 +67,12 @@ export default function TracoDigital() {
 
   return (
     <div className="w-full max-w-md bg-gray-50 rounded-xl shadow p-6 flex flex-col gap-4 border border-gray-200 items-center" role="region" aria-label="Prática de Traço Digital">
-      <h2 className="text-xl font-bold text-gray-700 mb-2" tabIndex={0}>Prática de Traço Digital</h2>
-      <p className="text-base text-gray-600 mb-2 font-medium" tabIndex={0}>Desenhe a letra abaixo:</p>
+      <h2 className="text-xl font-bold text-gray-700 mb-2" tabIndex={0} 
+        onMouseEnter={() => falar('Prática de Traço Digital')}
+      >Prática de Traço Digital</h2>
+      <p className="text-base text-gray-600 mb-2 font-medium" tabIndex={0} 
+        onMouseEnter={() => falar('Copie a letra abaixo:')}
+      >Copie a letra abaixo:</p>
       <motion.div
         className="text-7xl font-bold text-pastelOrange select-none mb-2"
         initial={{ scale: 0.8 }}

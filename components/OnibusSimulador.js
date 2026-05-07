@@ -15,6 +15,15 @@ const campos = [
   { label: 'Horário', value: visorData.horario, key: 'horario' },
 ];
 
+const falar = (texto) => {
+  if (window.speechSynthesis) {
+    window.speechSynthesis.cancel();
+    const utterance = new SpeechSynthesisUtterance(texto);
+    utterance.lang = 'pt-BR';
+    window.speechSynthesis.speak(utterance);
+  }
+};
+
 export default function OnibusSimulador() {
   const { speak, stop } = useVoiceGuidance();
   const [selected, setSelected] = useState(null);
@@ -35,8 +44,12 @@ export default function OnibusSimulador() {
 
   return (
     <div className="w-full max-w-md bg-gray-50 rounded-xl shadow p-6 flex flex-col gap-4 border border-gray-200" role="region" aria-label="Simulador de Visor de Ônibus">
-      <h2 className="text-xl font-bold text-gray-700 mb-2" tabIndex={0}>Simulador de Visor de Ônibus</h2>
-      <p className="text-base text-gray-600 mb-4 font-medium" tabIndex={0}>{pergunta}</p>
+      <h2 className="text-xl font-bold text-gray-700 mb-2" tabIndex={0} 
+        onMouseEnter={() => falar('Simulador de Visor de Ônibus')}
+      >Simulador de Visor de Ônibus</h2>
+      <p className="text-base text-gray-600 mb-4 font-medium" tabIndex={0} 
+        onMouseEnter={() => falar(pergunta)}
+      >{pergunta}</p>
       <div className="flex flex-col gap-2">
         {campos.map((campo) => (
           <button
